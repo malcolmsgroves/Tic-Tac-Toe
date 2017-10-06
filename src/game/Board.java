@@ -4,18 +4,18 @@ import java.util.Scanner;
 
 public class Board {
 
-	private static int DIMENSION = 3;
-	private static final char BLANK = ' ';
-	private static final char EX_MARK = 'X';
-	private static final char OH_MARK = 'O';
+	public static int DIMENSION = 3;
+	public static final char BLANK = ' ';
+	public static final char EX_MARK = 'X';
+	public static final char OH_MARK = 'O';
 	
 	private static char[][] grid = new char[DIMENSION][DIMENSION];
 	
 	private static enum GameResult {EX_WINS, OH_WINS, DRAW, IN_PROGRESS};
-	private static enum Player {EX, OH};
+	protected static enum Player {EX, OH};
 	
-	private static GameResult status;
-	private static Player turn;
+	public static GameResult status;
+	public static Player turn;
 	private static int[][] winning_line = new int[2][2];
 	
 	Board () {
@@ -182,5 +182,9 @@ public class Board {
 			}
 			System.out.println();
 		}
+	}
+	
+	public Player get_turn() {
+		return turn;
 	}
 }
