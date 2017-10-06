@@ -17,7 +17,7 @@ public class JavaFXBoard extends Group {
 
 	public static final int BOX_WIDTH = 100;
 	public static final int[][][] pixel_coords = new int[Board.DIMENSION][Board.DIMENSION][2];
-	protected Board board;
+	protected static Board board = new Board();
 
 	{
 		for(int i = 0; i < Board.DIMENSION; ++i) {
@@ -31,11 +31,37 @@ public class JavaFXBoard extends Group {
 	}
 
 	public JavaFXBoard () {
-		Board board = new Board();
 		build_board();
 		create_marks();
+		
 	}
 
+
+	public void end_game () {
+
+		Text win_banner = new Text();
+
+		switch(board.status) {
+		case EX_WINS:
+			win_banner.setText("X wins!");
+			break;
+		case OH_WINS:
+			win_banner.setText("O wins!");
+			break;
+		case DRAW:
+			win_banner.setText("It's a Draw!");
+			break;
+		case IN_PROGRESS:
+			System.out.println("JavaFXBoard exited in progress!");
+			break;
+		}
+
+		win_banner.setX(200);
+		win_banner.setY(90);
+		win_banner.setFont(Font.font(40));
+
+		this.getChildren().add(win_banner);
+	}
 	public void build_board() {
 
 		Group hash_lines = new Group();

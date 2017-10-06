@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 
 public class JavaFXApp extends Application {  
 
+	protected static JavaFXBoard root;
+	
 	@Override     
 	public void start(Stage primaryStage) throws Exception { 
 
@@ -50,7 +52,7 @@ public class JavaFXApp extends Application {
 
 
 		
-		JavaFXBoard root = new JavaFXBoard();
+		root = new JavaFXBoard();
 
 
 
@@ -62,10 +64,9 @@ public class JavaFXApp extends Application {
 		primaryStage.setScene(scene);
 
 
-
 		primaryStage.show();
 	}         
 	public static void main(String args[]){           
-		launch(args);      
+		launch(args);  
 	} 
 } 

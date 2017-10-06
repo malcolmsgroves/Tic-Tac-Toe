@@ -9,13 +9,13 @@ public class Board {
 	public static final char EX_MARK = 'X';
 	public static final char OH_MARK = 'O';
 	
-	private static char[][] grid = new char[DIMENSION][DIMENSION];
+	protected char[][] grid = new char[DIMENSION][DIMENSION];
 	
-	private static enum GameResult {EX_WINS, OH_WINS, DRAW, IN_PROGRESS};
+	protected static enum GameResult {EX_WINS, OH_WINS, DRAW, IN_PROGRESS};
 	protected static enum Player {EX, OH};
 	
-	public static GameResult status;
-	public static Player turn;
+	public GameResult status;
+	public Player turn;
 	private static int[][] winning_line = new int[2][2];
 	
 	Board () {

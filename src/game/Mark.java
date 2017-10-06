@@ -1,69 +1,80 @@
 package game;
 
 import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Scene;
+
 import javafx.scene.shape.*;
 import javafx.scene.text.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.event.EventHandler;
 
-import javafx.stage.Stage;
 
 
 public class Mark extends Group {
 
-	private int row;
-	private int col;
+	private int row = 0;
+	private int col = 0;
 
 	private int x_coord;
 	private int y_coord;
-	private Board board;
+	private Text text;
+	private Rectangle square;
 
 	public Mark(int row, int col, Board board) {
 		this.row = row;
 		this.col = col;
-		this.board = board;
+		
 
 		x_coord = 100 + col * JavaFXBoard.BOX_WIDTH;
 		y_coord = 100 + row * JavaFXBoard.BOX_WIDTH;
-
-		this.getChildren().addAll(create_box(), create_mark());
+		create_square();
+		create_text();
+		add_event_handler();
+		this.getChildren().addAll(square, text);
 	}
 
-	private Rectangle create_box() {
-		Rectangle square = new Rectangle();
+	private void create_square() {
+		square = new Rectangle();
 		square.setWidth(80);
 		square.setHeight(80);
 		square.setX(10 + x_coord);
 		square.setY(10 + y_coord);
 		square.setFill(Color.WHITE);
+	}
 
+	private void create_text() {
+		text = new Text(String.valueOf(Board.BLANK));
+		text.setFont(Font.font(100));
+		text.setX(10 + x_coord);
+		text.setY(10 + y_coord + 80);
+	}
+
+	private void add_event_handler() {
 		EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
 			@Override 
 			public void handle(MouseEvent e) { 
-				while(!board.make_play(row, col));
-				switch(board.get_turn()) {
-				case Board.Player.EX:
-					
+				System.out.println(row);
+				System.out.println(col);
+				JavaFXBoard.board.print_board();
+				JavaFXBoard.board.make_play(row,  col);
+				switch(JavaFXBoard.board.turn) {
+					case EX:
+						text.setText(String.valueOf(Board.OH_MARK));
+						break;
+					case OH:
+						text.setText(String.valueOf(Board.EX_MARK));
+						break;
 				}
-			} 
+				JavaFXBoard.board.check_win();
+				
+				// CLOSE MOUSE HANDLER IF TRUE
+				if(JavaFXBoard.board.status != Board.GameResult.IN_PROGRESS) {
+					JavaFXApp.root.end_game();
+				}
+			}
 		};
-		text.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
-
-		return square;
+		square.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
 	}
-
-	private Text create_mark() {
-		Text mark = new Text(String.valueOf(Board.EX_MARK));
-		mark.setFont(Font.font(100));
-		mark.setX(10 + x_coord);
-		mark.setY(10 + y_coord + 80);
-		return mark;
-	}
-
-	Board tic_tac_toe = new Board();
 
 
 }
