@@ -53,8 +53,7 @@ public class Mark extends Group {
 		EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
 			@Override 
 			public void handle(MouseEvent e) { 
-				System.out.println(row);
-				System.out.println(col);
+				
 				JavaFXBoard.board.print_board();
 				JavaFXBoard.board.make_play(row,  col);
 				switch(JavaFXBoard.board.turn) {
