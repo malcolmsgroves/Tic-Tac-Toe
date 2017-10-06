@@ -95,19 +95,7 @@ public class JavaFXBoard extends Group {
 
 		for(int i = 0; i < Board.DIMENSION; ++i) {
 			for(int j = 0; j < Board.DIMENSION; ++j) {
-				//				Group box = new Group();
-				//				
-				//				Rectangle square = new Rectangle();
-				//				square.setWidth(80);
-				//				square.setHeight(80);
-				//				square.setX(10 + pixel_coords[i][j][0]);
-				//				square.setY(10 + pixel_coords[i][j][1]);
-				//				
-				//				Text mark = new Text(" ");
-				//				mark.setX(10 + pixel_coords[i][j][0]);
-				//				mark.setY(10 + pixel_coords[i][j][1]);
-				//				
-				//				box.getChildren().addAll(square, mark);
+				
 				Mark box = new Mark(j, i, board);
 				ex_and_oh.getChildren().add(box);
 			}
